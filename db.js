@@ -13,17 +13,4 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-// const text = 'INSERT INTO users(username, email, password, usertype, photo ) VALUES($1, $2, $3, $4, $5) RETURNING *'
-// const values = ['brianc', 'brian.m.carlson@gmail.com', 'test', 'employer', 'test.jpg']
-
-// // callback
-// pool.query(text, values, (err, res) => {
-//     if (err) {
-//         console.log(err.stack)
-//     } else {
-//         console.log(res.rows[0])
-//         // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
-//     }
-// })
-
 export default pool;
