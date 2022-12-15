@@ -5,10 +5,7 @@ import cors from 'cors'
 
 
 // Routes
-import userRoutes from './routes/userRoutes.js'
-
-
-
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +16,6 @@ app.use(cors)
 
 // Routes
 app.use('/api/users', userRoutes);
-
 
 app.listen(PORT, () => {
     console.log(`App listening on ${PORT}`);
