@@ -22,5 +22,5 @@ create table offer (
 create table deal (
   id bigserial primary key,
   offer_id bigint not null references offer on delete cascade,
-  employee_id bigint not null references users on delete cascade,
+  employee_id bigint not null references users on delete cascade
 );
