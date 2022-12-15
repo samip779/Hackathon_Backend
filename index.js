@@ -21,6 +21,11 @@ app.use(express.json())
 
 // Routes
 app.use('/api/users', userRoutes)
+app.use('/api/health', (req, res) => {
+    res.json({
+        "status": "OK",
+    })
+})
 
 app.listen(PORT, () => {
     console.log(`App listening on ${PORT}`)
