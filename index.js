@@ -3,6 +3,9 @@ import 'express-async-errors';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+
+import { errorHandler, notFound } from './middleware/errorMiddleware.js';
+
 // Routes
 import userRoutes from './routes/userRoutes.js';
 
@@ -22,6 +25,9 @@ app.use('/api/health', (req, res) => {
     status: 'OK',
   });
 });
+
+app.use(notFound)
+app.use('*', errorHandler)
 
 app.listen(PORT, () => {
   console.log(`App listening on ${PORT}`);

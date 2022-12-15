@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import generateToken from '../utils/generateToken.js';
 
 const register = async (req, res) => {
-  const {username, email, password, usertype} = req.body;
+  const { username, email, password, usertype } = req.body;
 
   const salt = await bcrypt.genSalt(10);
   const encrypted_password = await bcrypt.hash(password, salt);
@@ -18,7 +18,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   if (!email || !password) throw new Error('Please provide email or password');
 
   const result = await pool.query('select * from users where email=$1', [
@@ -28,7 +28,11 @@ const login = async (req, res) => {
   const hashed_password = result.rows[0].password;
   const is_matched = await bcrypt.compare(password, hashed_password);
 
-  if (!is_matched) throw new Error("Password doesn't match");
+  if (!is_matched) {
+    res.status(400)
+    throw new Error("Password doesn't match")
+
+  };
 
   const token = generateToken(result.rows[0].id);
 
@@ -39,4 +43,4 @@ const login = async (req, res) => {
   });
 };
 
-export {register, login};
+export { register, login };
