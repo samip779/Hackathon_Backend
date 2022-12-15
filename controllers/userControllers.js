@@ -19,20 +19,25 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) throw new Error('Please provide email or password');
+  if (!email || !password) {
+    res.status(400);
+    throw new Error('Please provide email or password');
+  }
 
   const result = await pool.query('select * from users where email=$1', [
     email,
   ]);
-  if (result.rowCount === 0) throw new Error("Email doesn't exists");
+  if (result.rowCount === 0) {
+    res.status(400);
+    throw new Error("Email doesn't exists");
+  }
   const hashed_password = result.rows[0].password;
   const is_matched = await bcrypt.compare(password, hashed_password);
 
   if (!is_matched) {
-    res.status(400)
-    throw new Error("Password doesn't match")
-
-  };
+    res.status(400);
+    throw new Error("Password doesn't match");
+  }
 
   const token = generateToken(result.rows[0].id);
 
