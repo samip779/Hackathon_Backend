@@ -1,11 +1,11 @@
 import { Pool, Client } from 'pg'
 
 const pool = new Pool({
-    user: 'dbuser',
-    host: 'database.server.com',
-    database: 'mydb',
-    password: 'secretpassword',
-    port: 3211,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
 })
 
 const text = 'INSERT INTO users(name, email) VALUES($1, $2) RETURNING *'
