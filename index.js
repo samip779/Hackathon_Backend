@@ -8,6 +8,7 @@ import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 // Routes
 import userRoutes from './routes/userRoutes.js';
+import jobOfferRoutes from './routes/jobOfferRoutes.js';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/job-offer', jobOfferRoutes);
 app.use('/api/health', (req, res) => {
   res.json({
     status: 'OK',
