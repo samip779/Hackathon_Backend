@@ -45,6 +45,7 @@ const login = async (req, res) => {
     username: result.rows[0].username,
     email: result.rows[0].email,
     token: token,
+    userType: result.rows[0].usertype
   });
 };
 
