@@ -9,7 +9,8 @@ create table users (
   email text not null unique,
   password text not null,
   usertype usertype,
-  photo text
+  photo text,
+  bio text
 );
 
 create table offer (
@@ -29,3 +30,18 @@ create table deal (
   dealstatus dealstatus,
   unique(offer_id, employee_id)
 );
+
+create table post (
+  id bigserial primary key,
+  user_id bigint not null references users on delete cascade,
+  title text not null,
+  description text not null
+);
+
+create table comment (
+  id bigserial primary key,
+  post_id bigint not null references post on delete cascade,
+  content text not null,
+  user_id bigint not null references users on delete cascade
+
+)
