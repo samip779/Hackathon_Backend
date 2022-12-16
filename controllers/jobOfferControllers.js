@@ -94,6 +94,15 @@ const acceptProposal = async (req, res, next) => {
   res.json(result2.rows[0]);
 };
 
+const searchJobOffer = async (req, res, next) => {
+  const query = req.body.query;
+  const result = await pool.query(
+    "SELECT * from offer where to_tsvector('english', title) @@ to_tsquery($1) or to_tsvector('english', description) @@ to_tsquery($1)",
+    [query]
+  );
+  res.json(result.rows);
+};
+
 export {
   addJob,
   getJobs,
@@ -102,4 +111,5 @@ export {
   getMyCreatedOffers,
   getMyCreatedOffer,
   acceptProposal,
+  searchJobOffer,
 };

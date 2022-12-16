@@ -10,12 +10,14 @@ import {
   getMyCreatedOffers,
   getMyCreatedOffer,
   acceptProposal,
+  searchJobOffer,
 } from '../controllers/jobOfferControllers.js';
 
 import { protect } from '../middleware/authorization.js';
 
 router.post('/', protect, addJob);
 router.get('/', protect, getJobs);
+router.get('/search', searchJobOffer);
 router.get('/my-offers', protect, getMyCreatedOffers);
 router.get('/my-offers/:id', protect, getMyCreatedOffer);
 router.get('/:id', getJob);
