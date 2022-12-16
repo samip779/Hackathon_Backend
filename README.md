@@ -85,3 +85,199 @@ Response
 ```
 
 # Job Offer
+
+### Add a job offer
+```
+POST
+/api/job-offer
+Requires bearer token
+```
+Request
+```
+{
+    "title": "Searching for an artist",
+    "description": "searching for an artist for my book",
+    "price": 5000,
+}
+```
+Response
+```
+{
+    "user_id": 1,
+    "title": "Searching for an artist",
+    "description": "searching for an artist for my book",
+    "price": 5000,
+    "status": "vacant",
+}
+```
+
+### Get all job offers
+```
+POST
+/api/job-offer
+Requires bearer token
+```
+Response
+```
+[
+    {
+        "user_id": 1,
+        "title": "Searching for an artist",
+        "description": "searching for an artist for my book",
+        "price": 5000,
+        "status": "vacant",
+    },
+    {
+        "user_id": 2,
+        "title": "Searching for a painter",
+        "description": "searching for an artist for my art gallery",
+        "price": 15000,
+        "status": "vacant",
+    }
+]
+```
+
+### Update Job Offer
+```
+PUT
+/api/job-offer/update/<jobId>
+Requires bearer token
+```
+Request
+```
+{
+    "title": "Updated Title"
+    "description": "Updated Description"
+    "price": 30000,
+    "status": "completed",
+}
+```
+Response
+```
+{
+    "user_id": 1,
+    "title": "Updated Title"
+    "description": "Updated Description"
+    "price": 30000,
+    "status": "completed",
+}
+```
+
+### Search Job Offer
+```
+GET
+/api/job-offer/search
+```
+Request
+```
+{
+    "query": "artist",
+}
+```
+Response
+```json
+[
+    {
+        "user_id": 1,
+        "title": "Searching for an artist",
+        "description": "searching for an artist for my book",
+        "price": 5000,
+        "status": "vacant",
+    },
+    {
+        "user_id": 2,
+        "title": "Searching for a painter",
+        "description": "searching for an artist for my art gallery",
+        "price": 15000,
+        "status": "vacant",
+    }
+]
+```
+### Job offer created by employer
+```
+GET
+/api/job-offer/my-offer
+Requires bearer token
+```
+Response
+```json
+[
+    {
+        "user_id": 1,
+        "title": "Searching for an artist",
+        "description": "searching for an artist for my book",
+        "price": 5000,
+        "status": "vacant",
+    },
+    {
+        "user_id": 1,
+        "title": "Searching for a painter",
+        "description": "searching for an artist for my art gallery",
+        "price": 15000,
+        "status": "vacant",
+    }
+]
+```
+### Get Single Job offer created by employer
+```
+GET
+/api/job-offer/my-offer/<id>
+Requires bearer token
+```
+Response
+```json
+{
+    "user_id": 1,
+    "title": "Searching for an artist",
+    "description": "searching for an artist for my book",
+    "price": 5000,
+    "status": "vacant",
+}
+```
+
+### Get single job offer
+```
+GET
+/api/job-offer/<id>
+```
+Response
+```
+{
+    "user_id": 1,
+    "title": "Searching for an artist",
+    "description": "searching for an artist for my book",
+    "price": 5000,
+    "status": "vacant",
+}
+```
+### Apply for job offer
+```
+POST
+/api/job-offer/apply/<id>
+Requires bearer token
+```
+Response
+```json
+{
+    "id": 1,
+    "offer_id": 1,
+    "employee_id": 2,
+    "dealstatus": "request | accepted"
+}
+```
+
+### Accept proposal
+```
+POST
+/api/job-offer/accept-proposal/<id>
+Requires bearer token
+```
+Response
+```
+{
+    "id": 1,
+    "offer_id": 1,
+    "employee_id": 2,
+    "dealstatus": "accepted"
+}
+```
