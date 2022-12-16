@@ -11,7 +11,7 @@ Request
     "username": "Samip Luitel",
     "email": "samip@gmail.com",
     "password": "secret123",
-    "usertype": "employee" | "employer"
+    "usertype": "employee | employer"
 }
 ```
 Response
@@ -19,7 +19,7 @@ Response
 {
     "username": "Samip Luitel",
     "email": "samip@gmail.com",
-    "usertype": "employee" | "employer"
+    "usertype": "employee | employer"
 }
 ```
 
@@ -41,7 +41,7 @@ Response
     "email": "samip@gmail.com",
     "username": "Samip Luitel",
     "token": "<jwt-token>",
-    "userType": "employee" | "employer"
+    "userType": "employee | employer"
 }
 ```
 
@@ -64,7 +64,7 @@ Response
     "username": "Sameep Luitel",
     "email": "samip@gmail.com",
     "bio": "Updated bio"
-    "userType": "employee" | "employer"
+    "userType": "employee | employer"
 }
 ```
 
@@ -80,6 +80,8 @@ Response
     "username": "Sameep Luitel",
     "email": "samip@gmail.com",
     "bio": "Updated bio"
-    "userType": "employee" | "employer"
+    "userType": "employee | employer"
 }
 ```
+
+# Job Offer
