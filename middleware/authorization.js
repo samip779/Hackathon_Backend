@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import pool from '../db.js';
 
 const protect = async (req, res, next) => {
+  console.log('protect')
   let token;
   if (
     req.headers.authorization &&

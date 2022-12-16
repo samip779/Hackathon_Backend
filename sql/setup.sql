@@ -1,5 +1,7 @@
 create type usertype as enum ('employer', 'employee');
 create type offerstatus as enum ('assigned', 'completed', 'vacant');
+create type dealstatus as enum ('requested', 'accepted');
+
 
 create table users (
   id bigserial primary key,
@@ -23,5 +25,7 @@ create table offer (
 create table deal (
   id bigserial primary key,
   offer_id bigint not null references offer on delete cascade,
-  employee_id bigint not null references users on delete cascade
+  employee_id bigint not null references users on delete cascade,
+  dealstatus dealstatus,
+  unique(offer_id, employee_id)
 );
