@@ -52,7 +52,7 @@ const login = async (req, res) => {
 const getUserProfile = async (req, res) => {
   const id = req.params.id;
   const result = await pool.query(
-    'select id, username, email from users where id = $1',
+    'select id, username, email, bio, usertype from users where id = $1',
     [id]
   );
   if (result.rowCount === 0) {
