@@ -93,7 +93,7 @@ POST
 Requires bearer token
 ```
 Request
-```
+```json
 {
     "title": "Searching for an artist",
     "description": "searching for an artist for my book",
@@ -101,7 +101,7 @@ Request
 }
 ```
 Response
-```
+```json
 {
     "user_id": 1,
     "title": "Searching for an artist",
@@ -118,7 +118,7 @@ POST
 Requires bearer token
 ```
 Response
-```
+```json
 [
     {
         "user_id": 1,
@@ -144,7 +144,7 @@ PUT
 Requires bearer token
 ```
 Request
-```
+```json
 {
     "title": "Updated Title"
     "description": "Updated Description"
@@ -153,7 +153,7 @@ Request
 }
 ```
 Response
-```
+```json
 {
     "user_id": 1,
     "title": "Updated Title"
@@ -169,7 +169,7 @@ GET
 /api/job-offer/search
 ```
 Request
-```
+```json
 {
     "query": "artist",
 }
@@ -241,7 +241,7 @@ GET
 /api/job-offer/<id>
 ```
 Response
-```
+```json
 {
     "user_id": 1,
     "title": "Searching for an artist",
@@ -273,7 +273,7 @@ POST
 Requires bearer token
 ```
 Response
-```
+```json
 {
     "id": 1,
     "offer_id": 1,
