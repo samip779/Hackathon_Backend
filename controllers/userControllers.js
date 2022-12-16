@@ -61,4 +61,18 @@ const getUserProfile = async (req, res) => {
   res.json(result.rows[0]);
 };
 
-export { register, login, getUserProfile };
+const updateUserProfile = async (req, res) => {
+  const { username, bio } = req.body;
+  if (!username || !bio) {
+    res.status(403);
+    throw new Error('Please provide username and bio');
+  }
+
+  const result = await pool.query(
+    'update users set username= $1, bio= $2 where id= $3 returning username, email, bio, usertype',
+    [username, bio, req.user.id]
+  );
+  res.json(result.rows[0]);
+};
+
+export { register, login, getUserProfile, updateUserProfile };

@@ -10,6 +10,27 @@ const addJob = async (req, res, next) => {
   res.json(result.rows[0]);
 };
 
+const updateJob = async (req, res, next) => {
+  const user = req.user;
+  const jobId = req.params.jobId;
+  const { title, description, price, status } = req.body;
+
+  const jobOffer = await pool.query('select * from offer where id = $1', [
+    jobId,
+  ]);
+
+  if (jobOffer.rows[0].user_id !== user.id) {
+    res.status(403);
+    throw new Error('Forbidden Request');
+  }
+
+  const result = await pool.query(
+    'update offer set title = $1, description = $2, price = $3, status = $4 returning *',
+    [title, description, price, status]
+  );
+  res.json(result.rows[0]);
+};
+
 const getJobs = async (req, res, next) => {
   const result = await pool.query('select * from offer');
   res.json(result.rows);
@@ -106,6 +127,7 @@ const searchJobOffer = async (req, res, next) => {
 export {
   addJob,
   getJobs,
+  updateJob,
   getJob,
   applyJob,
   getMyCreatedOffers,

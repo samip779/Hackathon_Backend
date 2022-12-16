@@ -5,6 +5,7 @@ const router = express.Router();
 import {
   addJob,
   getJobs,
+  updateJob,
   getJob,
   applyJob,
   getMyCreatedOffers,
@@ -16,6 +17,7 @@ import {
 import { protect } from '../middleware/authorization.js';
 
 router.post('/', protect, addJob);
+router.put('/update/:jobId', protect, updateJob);
 router.get('/', protect, getJobs);
 router.get('/search', searchJobOffer);
 router.get('/my-offers', protect, getMyCreatedOffers);
