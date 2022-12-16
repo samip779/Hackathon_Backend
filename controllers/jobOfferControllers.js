@@ -73,6 +73,27 @@ const getMyCreatedOffer = async (req, res, next) => {
   res.json(result2.rows);
 };
 
+const acceptProposal = async (req, res, next) => {
+  const dealId = req.params.id;
+  const result = await pool.query('select * from deal where id = $1', [dealId]);
+  if (result.rowCount === 0) {
+    res.status(404);
+    throw new Error('Deal Not Found');
+  }
+  if (result.rows[0].dealstatus === 'accepted') {
+    res.status(403);
+    throw new Error('Deal already Accepted');
+  }
+  const result2 = await pool.query(
+    "update deal set dealstatus = 'accepted' where id = $1 returning *",
+    [dealId]
+  );
+  if (result2.rowCount !== 1) {
+    throw new Error('INTERNAL SERVER ERROR');
+  }
+  res.json(result2.rows[0]);
+};
+
 export {
   addJob,
   getJobs,
@@ -80,4 +101,5 @@ export {
   applyJob,
   getMyCreatedOffers,
   getMyCreatedOffer,
+  acceptProposal,
 };

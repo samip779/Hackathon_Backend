@@ -9,7 +9,7 @@ const register = async (req, res) => {
   const encrypted_password = await bcrypt.hash(password, salt);
 
   const text =
-    'INSERT INTO users(username, email, password, usertype) VALUES($1, $2, $3, $4) RETURNING *';
+    'INSERT INTO users(username, email, password, usertype) VALUES($1, $2, $3, $4) RETURNING username, email, usertype';
   const values = [username, email, encrypted_password, usertype];
 
   // callback
@@ -48,4 +48,17 @@ const login = async (req, res) => {
   });
 };
 
-export { register, login };
+const getUserProfile = async (req, res) => {
+  const id = req.params.id;
+  const result = await pool.query(
+    'select id, username, email from users where id = $1',
+    [id]
+  );
+  if (result.rowCount === 0) {
+    res.status(404);
+    throw new Error('User not found');
+  }
+  res.json(result.rows[0]);
+};
+
+export { register, login, getUserProfile };
