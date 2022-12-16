@@ -223,16 +223,20 @@ Response
 GET
 /api/job-offer/my-offer/<id>
 Requires bearer token
+(Note: Represents a deal request)
 ```
 Response
 ```json
-{
-    "user_id": 1,
-    "title": "Searching for an artist",
-    "description": "searching for an artist for my book",
-    "price": 5000,
-    "status": "vacant",
-}
+[
+    {
+        "id": 1,
+        "offer_id": 1,
+        "employee_id": 2,
+        "dealstatus": "requested",
+        "username": "prasanna",
+        "email": "prasanna@example.com"
+    }
+]
 ```
 
 ### Get single job offer
