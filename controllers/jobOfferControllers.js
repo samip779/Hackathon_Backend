@@ -32,7 +32,7 @@ const updateJob = async (req, res, next) => {
 };
 
 const getJobs = async (req, res, next) => {
-  const result = await pool.query('select * from offer');
+  const result = await pool.query('select * from offer where status = \'vacant\'');
   res.json(result.rows);
 };
 
